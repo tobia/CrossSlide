@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>CrossSlide examples</title>
+    <script src='jquery-1.4.2.min.js'></script>
+    <script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js'></script>
+    <style>
+      div {
+        border: 2px solid #555;
+        width: 550px;
+      }
+      #test1 {
+        height: 367px;
+      }
+      #test2 {
+        height: 200px;
+      }
+      #test3 {
+        height: 367px;
+      }
+    </style>
+    <script>
+      $(function() {
+        $('#test1').crossSlide({
+          sleep: 2,
+          fade: 1
+        }, [
+          { src: 'sand-castle.jpeg' },
+          { src: 'sunflower.jpeg'   },
+          { src: 'flip-flops.jpeg'  },
+          { src: 'rubber-ring.jpeg' }
+        ]);
+        $('#test2').crossSlide({
+          speed: 45,
+          fade: 1
+        }, [
+          { src: 'sand-castle.jpeg', dir: 'up'   },
+          { src: 'sunflower.jpeg',   dir: 'down' },
+          { src: 'flip-flops.jpeg',  dir: 'up'   },
+          { src: 'rubber-ring.jpeg', dir: 'down' }
+        ]);
+        $('#test3').crossSlide({
+          fade: 1
+        }, [
+          {
+            src:  'sand-castle.jpeg',
+            from: '100% 80% 1x',
+            to:   '100% 0% 1.7x',
+            time: 3
+          }, {
+            src:  'sunflower.jpeg',
+            from: 'top left',
+            to:   'bottom right 1.5x',
+            time: 2
+          }, {
+            src:  'flip-flops.jpeg',
+            from: '100% 80% 1.5x',
+            to:   '80% 0% 1.1x',
+            time: 2
+          }, {
+            src:  'rubber-ring.jpeg',
+            from: '100% 50%',
+            to:   '30% 50% 1.5x',
+            time: 2
+          }
+        ]);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>CrossSlide examples</h1>
+    <h3>Static cross-fade</h3>
+    <div id='test1'>Loading...</div>
+    <h3>Slide and cross-fade</h3>
+    <div id='test2'>Loading...</div>
+    <h3>Ken Burns effect</h3>
+    <div id='test3'>Loading...</div>
+    <p>
+    Credits go to
+    <a href='http://flickr.com/photos/spacetrucker/94209642/'>spacetrucker</a>,
+    <a href='http://flickr.com/photos/hichako/1125341449/'>hichako</a>,
+    <a href='http://flickr.com/photos/jayniebell/1125216143/'>jayniebell</a>, and
+    <a href='http://flickr.com/photos/ruminatrix/1125292682/'>ruminatrix</a>
+    for the nice summer pictures.
+  </body>
+</html>
