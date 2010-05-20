@@ -9,13 +9,13 @@ portable across browsers as jQuery itself (that is, a lot!)
 CrossSlide can set up a few different effects, depending on how it's called.
 See the bottom of this file if you are interested in a simple HOWTO.
 
-See the html version for live examples: http://tobia.github.com/CrossSlide
+[**SEE THE HTML VERSION FOR LIVE EXAMPLES**](http://tobia.github.com/CrossSlide)
 
 Static cross-fade
 -----------------
 
-The simplest effect, a cross-fade between static pictures is also simple to set
-up:
+The simplest effect, a cross-fade between static pictures is just as simple to
+set up:
 
     $('#placeholder').crossSlide({
       sleep: 2,
@@ -163,9 +163,9 @@ Here is how to put CrossSlide in your website in four simple steps!
         <script src="jquery.js"></script>
         <script src="jquery.cross-slide.js"></script>
 
-    You can download the latest version of my plugin from GitHub:
-    http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js
-    (right click and Save as.)
+    To download the latest version of my plugin
+    [right click here and Save as
+    ](http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js).
 
 2.  Put a block element somewhere in your page and give it an `id`:
 
