@@ -1,0 +1,29 @@
+html {
+	background: #eaf2f5;
+}
+body {
+	background: white;
+	margin: 1em 10%;
+	padding: 1em;
+	border: 1px solid #bedce7;
+}
+a:link, a:visited {
+	color: #4183ca;
+}
+p.menu {
+	font-family: sans-serif;
+	font-size: 90%;
+}
+p.footer {
+	font-size: 90%;
+}
+div.demo {
+	border: 1px solid #555;
+}
+hr {
+	border: none;
+	border-bottom: 1px solid #bedce7;
+}
+p {
+	text-align: justify;
+}

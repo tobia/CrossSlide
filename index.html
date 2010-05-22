@@ -1,12 +1,12 @@
 <html>
 <head>
-  <title>CrossSlide examples</title>
+  <title>CrossSlide</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <script src='jquery-1.4.2.min.js'></script>
   <script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js'></script>
+  <link rel='stylesheet' href='style.css'>
   <style>
-    div {
-      border: 2px solid #555;
+    div.demo {
       width: 550px;
     }
     #test1 {
@@ -70,57 +70,74 @@
 <body>
 <h1>CrossSlide</h1>
 
-<p>CrossSlide is a jQuery plugin implementing in Javascript some common slide-show
-animations, traditionally only available via Adobe Flash™ or other proprietary
-plugins. CrossSlide builds upon jQuery's animation facility, so it is as
-portable across browsers as jQuery itself (that is, a lot!)</p>
+<p class=menu>
+<a href='http://github.com/tobia/CrossSlide'>Project page</a> –
+<a href='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.min.js'><b>Download minified</b></a> –
+<a href='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js'>Download source</a> –
+<a href='http://github.com/tobia/CrossSlide/issues'>Report issues</a>
+</p>
+<hr>
 
-<p>CrossSlide can set up a few different effects, depending on how it's called.
-See the bottom of this file if you are interested in a simple HOWTO.</p>
+<p>CrossSlide is a <a href='http://jquery.com/'>jQuery</a> plugin implementing
+in under 2kB<sup><a name=use1 href=#note1>1</a></sup> of Javascript code some
+common slide-show animations, traditionally only available via Adobe Flash™ or
+other proprietary plugins.  CrossSlide builds upon jQuery's animation facility,
+so it is as portable across browsers as jQuery itself (that is, a lot!)</p>
+
+<p>Internally CrossSlide does not rely on lookup tables, but builds a "chain"
+of functions. Each function will start a linear phase of the animation through
+jQuery, setting the next function in the chain as an animation-done callback.
+After all the functions are prepared and the animation has started, no other
+calculations are made. This setup reduces runtime overhead to the absolute
+minimum, making CrossSlide the most optimized implementation of these
+effects.</p>
+
+<p>CrossSlide can create a few different effects, depending on how it's
+called.</p>
 
 <h2>Static cross-fade</h2>
 
-<div id='test1'>Loading...</div>
+<div class=demo id=test1>Loading...</div>
 
-<p>The simplest effect, a cross-fade between static pictures is just as simple to set
-up:</p>
+<p>The simplest effect, a cross-fade between static pictures is just as simple
+to set up:</p>
 
 <pre><code>$('#placeholder').crossSlide({
   sleep: 2,
   fade: 1
 }, [
-  { src: 'picture1.jpeg' },
-  { src: 'picture2.jpeg' },
-  { src: 'picture3.jpeg' },
-  { src: 'picture4.jpeg' }
+  { src: 'sand-castle.jpeg' },
+  { src: 'sunflower.jpeg'   },
+  { src: 'flip-flops.jpeg'  },
+  { src: 'rubber-ring.jpeg' }
 ]);
 </code></pre>
 
-<p><code>#placeholder</code> is the block-level element (such as a <code>div</code>) whose contents will
-be replaced with the animation. What you put inside it in your HTML is only
-shown while the images are being preloaded, or if the user-agent has JavaScript
-turned off. The current version of CrossSlide waits until all the images are
-preloaded before starting the slideshow, so I usually put the first image as a
-static background-image of the div too, so that users with a slow connection
-won't see a big hole in the website while all the images are being loaded.</p>
+<p><code>#placeholder</code> is the block-level element (such as a
+<code>div</code>) whose contents will be replaced with the animation. What you
+put inside it in your HTML is only shown while the images are being preloaded,
+or if the user-agent has JavaScript turned off. The current version of
+CrossSlide waits until all the images are preloaded before starting the
+slideshow, so I usually put the first image as a background-image of the div,
+so that users with a slow connection won't see a big hole in the website while
+all the images are being loaded.</p>
 
-<p>The first parameter to the <code>crossSlide()</code> function call is a dictionary of
-options, which will be explained by example throughout this document. The
-second parameter is an array of objects, defining the sequence of pictures,
-each with its source path and various attributes.</p>
+<p>The first parameter to the <code>crossSlide()</code> function call is a
+dictionary of options. The second parameter is an array of objects, defining
+the sequence of pictures, each with its source path and various attributes.</p>
 
-<p>To get this first kind of effect you must specify <code>sleep</code>, which is the time
-every image will stay fixed on screen, and <code>fade</code>, the time taken by each
-cross-fade animation between consecutive images. Both are expressed in seconds
-and can accept decimal values.</p>
+<p>To get the static cross-fade effect you must specify the <code>sleep</code>
+option, which is the time every image will take on its own, and the
+<code>fade</code> option, which is the duration of each cross-fade animation
+between images. Both are expressed in seconds and can accept decimal values.</p>
 
 <h2>Slide and cross-fade</h2>
 
-<p>This is the kind of animation from which the plugin takes its name. It shows a
-sequence of pictures moving at a constant speed in alternating directions, with
-a cross-fade effect between any two pictures.</p>
+<p>This is the kind of animation from which the plugin takes its name. It shows
+a sequence of pictures moving at a constant speed in alternating directions,
+with a cross-fade effect between any two pictures.</p>
 
-<div id='test2'>Loading...</div>
+<div class=demo id=test2>Loading...</div>
 
 <p>Here is the jQuery code to set it up:</p>
 
@@ -128,123 +145,120 @@ a cross-fade effect between any two pictures.</p>
   speed: 45,
   fade: 1
 }, [
-  { src: 'picture1.jpeg' dir: 'up'   },
-  { src: 'picture2.jpeg' dir: 'down' },
-  { src: 'picture3.jpeg' dir: 'up'   },
-  { src: 'picture4.jpeg' dir: 'down' }
+  { src: 'sand-castle.jpeg', dir: 'up'   },
+  { src: 'sunflower.jpeg',   dir: 'down' },
+  { src: 'flip-flops.jpeg',  dir: 'up'   },
+  { src: 'rubber-ring.jpeg', dir: 'down' }
 ]);
 </code></pre>
 
-<p>Notice how the <code>speed</code> parameter, expressed in pixels/second, has taken the
-place of <code>sleep</code>, as the images aren't static anymore, but move with constant
-speed. <code>fade</code> is still required and still expressed in seconds. You cannot use
-both <code>speed</code> and <code>sleep</code> at the same time, because they trigger different
+<p>Notice how the <code>speed</code> parameter, expressed in pixels/second, has
+taken the place of <code>sleep</code>, as the images aren't static anymore, but
+move with constant speed. <code>fade</code> is still required and still
+expressed in seconds. You cannot use both <code>speed</code> and
+<code>sleep</code> at the same time, because they trigger different
 effects.</p>
 
 <p>Additionally you have to specify the direction in which each image should be
 moving. The plugin computes the rest, panning each image edge-to-egde at the
-desired speed, in the desired direction. <code>dir</code> must be one of <code>up</code>, <code>down</code>,
-<code>left</code> or <code>right</code>. For best results I recommend using an even number of
-pictures and alternating directions, as in the example.</p>
+desired speed, in the desired direction. <code>dir</code> must be one of
+<code>up</code>, <code>down</code>, <code>left</code> or <code>right</code>.
+For best results I recommend using an even number of pictures and alternating
+directions, as in the example.</p>
 
 <h2>Ken Burns effect</h2>
 
-<p>Finally, CrossSlide can be brought up to the full visual power of a Ken Burns
-effect: panning, zooming and fading each image to specific points, to guide the
-eye of the viewer and convey meaning:</p>
+<p>Finally, CrossSlide can be brought up to the full visual power of a
+so-called Ken Burns effect: panning, zooming and fading each image to specific
+points, to guide the eye of the viewer and convey meaning:</p>
 
-<div id='test3'>Loading...</div>
+<div class=demo id=test3>Loading...</div>
 
 <pre><code>$('#placeholder').crossSlide({
   fade: 1
 }, [
   {
-    src:  'picture1.jpeg',
+    src:  'sand-castle.jpeg',
     from: '100% 80% 1x',
-    to:   '100% 0% 0.7x',
-    time: 3,
-    href: 'http://website.com/some/url'
+    to:   '100% 0% 1.7x',
+    time: 3
   }, {
-    src:  'picture2.jpeg',
+    src:  'sunflower.jpeg',
     from: 'top left',
-    to:   'bottom right 0.5x',
-    time: 2,
-    href: 'http://website.com/some/url'
+    to:   'bottom right 1.5x',
+    time: 2
   }, {
-    src:  'picture3.jpeg',
-    from: '100% 80% 0.5x',
-    to:   '80% 0% 1x',
-    time: 2,
-    href: 'http://website.com/some/url'
+    src:  'flip-flops.jpeg',
+    from: '100% 80% 1.5x',
+    to:   '80% 0% 1.1x',
+    time: 2
   }, {
-    src:  'picture4.jpeg',
+    src:  'rubber-ring.jpeg',
     from: '100% 50%',
-    to:   '30% 50% 0.5x',
-    time: 2,
-    href: 'http://website.com/some/url'
+    to:   '30% 50% 1.5x',
+    time: 2
   }
 ]);
 </code></pre>
 
-<p>Every picture's pan &amp; zoom effect will last for <code>time</code> seconds plus the two
-cross-fades, each taking an additional <code>fade</code> seconds. <code>from</code> and <code>to</code> define
-the starting and ending points of the effect, including the cross-fade part.
-They represent a background-position value, following the syntax of the CSS
-property of the same name, plus an optional zoom factor. The zoom defaults to
-1x if not provided. The background-position part only accepts keywords and
-percent values, lengths are not supported. As in CSS, the percentages are
-interpreted as horizontal followed by vertical, while the keywords can be put
-in any order.</p>
+<p>Every picture's pan &amp; zoom effect will last for <code>time</code>
+seconds plus the two cross-fades, each taking an additional <code>fade</code>
+seconds. <code>from</code> and <code>to</code> define the starting and ending
+points of the effect, including the cross-fade part. They are expressed as a
+background-position value, following the syntax of the CSS property of the same
+name, plus an optional zoom factor. The zoom defaults to 1x if not provided.
+The background-position part only accepts keywords and percent values, lengths
+are not supported. As in CSS, the percentages are interpreted as horizontal
+followed by vertical, while the keywords can be put in any order.</p>
 
-<p>Every picture can be made a hyperlink, by adding a <code>href</code> parameter with a
-relative or absolute URI. You can also add an <code>onclick</code> parameter, pointing to
-a function that will handle click events. These options work in all the other
-CrossSlide modes too.</p>
+<p>Every picture can be made a hyperlink, by adding a <code>href</code>
+parameter with a relative or absolute URI to the option dictionary of the
+single picture. You can also add an <code>onclick</code> parameter, pointing to
+a function that will handle click events.</p>
 
-<p>Other options you can put in the first dictionary are: <code>loop</code> (numeric) to have
-the animation loop just once, or a fixed number of times, and then stop;
-<code>shuffle</code> (boolean) to have CrossSlide automatically shuffle the images before
-starting the slideshow; and <code>doubleFade</code> (boolean) to have both a fade-out and
-a fade-in effect when switching images (this is useful with transparent
-images.)</p>
+<p>Other options you can put in the global dictionary are: <code>loop</code>
+(numeric) to have the animation loop just once, or a fixed number of times, and
+then stop; <code>shuffle</code> (boolean) to have CrossSlide automatically
+shuffle the images before starting the slideshow; and <code>doubleFade</code>
+(boolean) to have both a fade-out and a fade-in effect when switching images
+(this is useful with transparent images.)</p>
 
 <h2>Performance</h2>
 
-<p>This kind of effect relies on the browser for positioning, scaling and cropping
-images, through CSS and the DOM. Thus it depends heavily on how the browser and
-the underlying graphics platform optimize these operations. Compared to native
-implementations of the same effects, CrossSlide is quite CPU-intensive, but
-recent hardware handles a moderate usage without problems. A few combinations
-of browsers and platforms seem to be less optimized than others, namely Firefox
-on Mac OS X and Linux. Every other combination I've tested shows decent
-performance: Firefox on Windows; Internet Explorer, Safari, Opera and Chrome.</p>
+<p>This kind of effect relies on the browser for positioning, scaling and
+cropping images, through CSS and the DOM. Thus it depends heavily on how the
+browser and the underlying graphics platform optimize these operations.
+Compared to native implementations of the same effects, CrossSlide is quite
+CPU-intensive, but recent hardware handles a moderate usage without problems. A
+few combinations of browsers and platforms seem to be less optimized than
+others, namely Firefox on Mac OS X and Linux. Every other combination I've
+tested shows decent performance: Firefox on Windows; Internet Explorer, Safari,
+Opera and Chrome.</p>
 
 <p>Some browsers on some platforms apply a nice anti-alias filter to the images
 when you use a zoom factor in the Ken Burns mode, but most don't. Therefore I
 suggest keeping your zoom factors below 1x, in order to at least avoid ugly
 'pixel mosaic' effects.</p>
 
-<h2>Newbie HOWTO</h2>
+<h2>How do I use it</h2>
 
-<p>Here is how to put CrossSlide in your website in four simple steps!</p>
+<p>Here is how to put CrossSlide on your website in four simple steps!</p>
 
 <ol>
-<li><p>Include the jQuery library and my plugin in the <code>head</code> section of your
-website:</p>
+<li><p>Include the jQuery library and my plugin in the <code>head</code>
+section of your website:</p>
 
-<pre><code>&lt;script src="jquery.js"&gt;&lt;/script&gt;
-&lt;script src="jquery.cross-slide.js"&gt;&lt;/script&gt;
+<pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.cross-slide.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>To download the latest version of my plugin
-<a href="http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js">right click here and Save as
-</a>.</p></li>
-<li><p>Put a block element somewhere in your page and give it an <code>id</code>:</p>
+<li><p>Put a block element somewhere in your page and give it an
+<code>id</code>:</p>
 
 <pre><code>&lt;div id="slideshow"&gt;&lt;/div&gt;
 </code></pre></li>
-<li><p>Make sure the element has a fixed size, even when emptied of its contents,
-for example by putting this piece of CSS in your webisite stylesheet:</p>
+<li><p>Make sure the element has a fixed size, even when emptied of its
+contents, by setting its width and height in the CSS stylesheet:</p>
 
 <pre><code>#slideshow {
   width: 600px;
@@ -252,8 +266,8 @@ for example by putting this piece of CSS in your webisite stylesheet:</p>
 }
 </code></pre></li>
 <li><p>Open a script tag, define a "document ready handler" (see the jQuery
-tutorial if you wonder what it means) and call my plugin on the <code>div</code> you
-created at step 2:</p>
+tutorial if you wonder what it means) and activate my plugin on the
+<code>div</code> you created in step 2:</p>
 
 <pre><code>&lt;script&gt;
   $(function() {
@@ -261,10 +275,10 @@ created at step 2:</p>
       sleep: 2,
       fade: 1
     }, [
-      { src: 'test1.jpg' },
-      { src: 'test2.jpg' },
-      { src: 'test3.jpg' },
-      { src: 'test4.jpg' }
+      { src: 'picture1.jpg' },
+      { src: 'picture2.jpg' },
+      { src: 'picture3.jpg' },
+      { src: 'picture4.jpg' }
     ])
   });
 &lt;/script&gt;
@@ -274,26 +288,31 @@ created at step 2:</p>
 <p>Things to keep in mind:</p>
 
 <ul>
-<li><p>Keep an eye on the Error console (in Firefox it's under Tools menu) because
-that's where my script will post any error messages you are supposed to read,
-for example when the options you use don't make sense together.</p></li>
-<li><p>Make sure the browser can find the images you reference in the <code>src</code>
-attributes, relative to the path of the current page, because if the browser
-cannot load them, my plugin has no way to know and will just hangs there,
-without any error messages.</p></li>
-<li><p>Don't put a comma after the last element in an array or object (this means
-don't put a comma just before a closing brace or bracket, even if it's on the
-previous line) because Internet Explorer won't like it and will refuse to run
-the script, again without any error message.</p></li>
+<li><p>Keep an eye on the Error console (in Firefox it's under Tools menu)
+because that's where my script will post any error messages you are supposed to
+read, for example when the options you use don't make sense together.</p></li>
+<li><p>Make sure the browser can find the images you reference in the
+<code>src</code> attributes, relative to the path of the current page, because
+if the browser cannot load them, my plugin has no way to know and will just
+hangs there, without any error messages.</p></li>
+<li><p>Don't put a comma after the last element in an array or object (this
+means don't put a comma just before a closing brace or bracket, even if it's on
+the previous line) because Internet Explorer won't like it and will refuse to
+run the script, again without any error message.</p></li>
 </ul>
 
 <hr>
-<p>
+
+<p class=footer>
+<a name=note1 href=#use1>1</a>: minified and gzipped, code only.<br></p>
+
+<p class=footer>
 Credits go to
 <a href='http://flickr.com/photos/spacetrucker/94209642/'>spacetrucker</a>,
 <a href='http://flickr.com/photos/hichako/1125341449/'>hichako</a>,
 <a href='http://flickr.com/photos/jayniebell/1125216143/'>jayniebell</a>, and
 <a href='http://flickr.com/photos/ruminatrix/1125292682/'>ruminatrix</a>
-for the nice summer pictures.
+for the nice summer pictures.</p>
+
 </body>
 </html>
