@@ -1,4 +1,6 @@
-/*
+/*!
+ * CrossSlide jQuery plugin v0.4
+ *
  * Copyright 2007-2010 by Tobia Conforto <tobia.conforto@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -14,22 +16,23 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc., 51
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+/* Changelog:
  *
- * Changelog:
- * 0.1    2007-08-19  Initial release
- *        2008-08-21  Re-released under GPL v2
- * 0.1.1  2008-09-18  Compatibility with prototype.js
- * 0.2    2008-10-15  Linkable images, contrib. by Tim Rainey <tim@zmlabs.com>
- * 0.3    2008-10-22  Option to repeat the animation a fixed number of times
- * 0.3.1  2008-11-11  Better error messages
- * 0.3.2  2008-11-11  Fixed CSS bugs, contrib. by Erwin Bot <info@ixgcms.nl>
- * 0.3.3  2008-12-14  Added onclick option
+ * 0.4    2010-05-20  Better error reporting, published on GitHub
+ * 0.3.7  2009-05-14  Fixed bug when container div's CSS position is not set
+ * 0.3.6  2009-04-16  Added alt option
+ * 0.3.5  2009-03-12  Fixed usage of href parameter in 'Ken Burns' mode
  * 0.3.4  2009-03-12  Added shuffle option,
  *                    contrib. by Ralf Santbergen <ralf_santbergen@hotmail.com>
- * 0.3.5  2009-03-12  Fixed usage of href parameter in 'Ken Burns' mode
- * 0.3.6  2009-04-16  Added alt option
- * 0.3.7  2009-05-14  Fixed bug when container div's CSS position is not set
- * 0.4    2010-05-20  Better error reporting, published on GitHub
+ * 0.3.3  2008-12-14  Added onclick option
+ * 0.3.2  2008-11-11  Fixed CSS bugs, contrib. by Erwin Bot <info@ixgcms.nl>
+ * 0.3.1  2008-11-11  Better error messages
+ * 0.3    2008-10-22  Option to repeat the animation a fixed number of times
+ * 0.2    2008-10-15  Linkable images, contrib. by Tim Rainey <tim@zmlabs.com>
+ * 0.1.1  2008-09-18  Compatibility with prototype.js
+ * 0.1    2008-08-21  Re-released under GPL v2
+ * 0.1    2007-08-19  Initial release
  */
 
 jQuery.fn.crossSlide = function(opts, plan)
