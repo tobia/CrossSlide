@@ -1,10 +1,12 @@
-html {
+html, body {
 	background: #eaf2f5;
+	margin: 0;
+	padding: 0;
 }
-body {
+div.body {
 	background: white;
 	margin: 1em 10%;
-	padding: 1em;
+	padding: 0 1em;
 	border: 1px solid #bedce7;
 }
 a:link, a:visited {
@@ -22,7 +24,8 @@ div.demo {
 }
 hr {
 	border: none;
-	border-bottom: 1px solid #bedce7;
+	background: #bedce7;
+	height: 1px;
 }
 p {
 	text-align: justify;
