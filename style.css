@@ -12,6 +12,15 @@ div.body {
 a:link, a:visited {
 	color: #4183ca;
 }
+h1 {
+  margin: .5em 0;
+}
+h2, p, ul, ol, li, pre, hr {
+  margin: .8em 0;
+}
+em {
+  color: #555;
+}
 p.menu {
 	font-family: sans-serif;
 	font-size: 90%;
@@ -21,10 +30,12 @@ p.footer {
 }
 div.demo {
 	border: 1px solid #555;
+  margin: 1em auto;
 }
 hr {
 	border: none;
-	background: #bedce7;
+	color: #bedce7;
+	background-color: #bedce7;
 	height: 1px;
 }
 p {

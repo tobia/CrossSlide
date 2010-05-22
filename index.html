@@ -2,6 +2,7 @@
 <head>
   <title>CrossSlide</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="google-site-verification" content="51fRdx-2ED6h7sM165D6xFt80WIlp0c4vc24M8vUcQ8">
   <script src='jquery-1.4.2.min.js'></script>
   <script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js'></script>
   <link rel='stylesheet' href='style.css'>
@@ -71,6 +72,7 @@
 <div class=body>
 
 <h1>CrossSlide</h1>
+<em>A jQuery plugin to create pan and cross-fade animations</em>
 
 <p class=menu>
 <a href='http://github.com/tobia/CrossSlide'>Project page</a> –
@@ -176,6 +178,8 @@ points, to guide the eye of the viewer and convey meaning:</p>
 
 <div class=demo id=test3>Loading...</div>
 
+<p>In this case the jQuery code is a bit more complex:</p>
+
 <pre><code>$('#placeholder').crossSlide({
   fade: 1
 }, [
@@ -227,7 +231,7 @@ shuffle the images before starting the slideshow; and <code>doubleFade</code>
 
 <h2>Performance</h2>
 
-<p>This kind of effect relies on the browser for positioning, scaling and
+<p>jQuery animation effects rely on the browser for positioning, scaling and
 cropping images, through CSS and the DOM. Thus it depends heavily on how the
 browser and the underlying graphics platform optimize these operations.
 Compared to native implementations of the same effects, CrossSlide is quite
@@ -238,11 +242,11 @@ tested shows decent performance: Firefox on Windows; Internet Explorer, Safari,
 Opera and Chrome.</p>
 
 <p>Some browsers on some platforms apply a nice anti-alias filter to the images
-when you use a zoom factor in the Ken Burns mode, but most don't. Therefore I
-suggest keeping your zoom factors below 1x, in order to at least avoid ugly
-'pixel mosaic' effects.</p>
+when you use a zoom factor in the Ken Burns mode, others don't. Therefore I
+recommend keeping your zoom factors below 1x, in order to avoid ugly 'pixel
+mosaic' effects.</p>
 
-<h2>How do I use it</h2>
+<h2>How to use it</h2>
 
 <p>Here is how to put CrossSlide on your website in four simple steps!</p>
 
