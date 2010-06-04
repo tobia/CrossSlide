@@ -19,6 +19,7 @@
  */
 /* Changelog:
  *
+ * 0.4.1  2010-06-04  Added target option
  * 0.4    2010-05-20  Better error reporting, published on GitHub
  * 0.3.7  2009-05-14  Fixed bug when container div's CSS position is not set
  * 0.3.6  2009-04-16  Added alt option
@@ -247,6 +248,8 @@ jQuery.fn.crossSlide = function(opts, plan)
         elm.click(p.onclick);
       if (p.alt)
         elm.find('img').attr('alt', p.alt);
+      if (p.target)
+        elm.find('img').attr('target', p.target);
       elm.appendTo(self);
     }
     speed = undefined; // speed mode has now been translated to full mode
