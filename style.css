@@ -41,3 +41,26 @@ hr {
 p {
 	text-align: justify;
 }
+div.right {
+	font-size: 90%;
+	float: right;
+	width: 90px;
+}
+div.right button {
+	width: 90px;
+}
+div.caption {
+	position: absolute;
+	margin-top: -75px;
+	margin-left: -75px;
+	width: 150px;
+	text-align: center;
+	left: 50%;
+	padding: 5px 10px;
+	background: black;
+	color: white;
+	font-family: sans-serif;
+	opacity: .7;
+	border-radius: 10px;
+	display: none;
+}
