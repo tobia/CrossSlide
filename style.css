@@ -3,6 +3,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+body {
+	/font-size: 105%;
+}
+code {
+	/font-size: 85%;
+	/font-family: 'Lucida Console';
+}
 div.body {
 	background: white;
 	margin: 1em 10%;
@@ -16,7 +23,11 @@ h1 {
   margin: .5em 0;
 }
 h2, p, ul, ol, li, pre, hr {
-  margin: .8em 0;
+  margin-top: .8em;
+  margin-bottom: .8em;
+}
+hr {
+  /margin: 0;
 }
 em {
   color: #555;
@@ -31,6 +42,16 @@ p.footer {
 div.demo {
 	border: 1px solid #555;
   margin: 1em auto;
+	width: 550px;
+}
+#test1 {
+	height: 367px;
+}
+#test2 {
+	height: 200px;
+}
+#test3 {
+	height: 367px;
 }
 hr {
 	border: none;
@@ -43,7 +64,9 @@ p {
 }
 div.right {
 	font-size: 90%;
-	float: right;
+	right: 10%;
+	padding-right: 1.2em;
+	position: absolute;
 	width: 90px;
 }
 div.right button {
@@ -60,7 +83,6 @@ div.caption {
 	background: black;
 	color: white;
 	font-family: sans-serif;
-	opacity: .7;
 	border-radius: 10px;
 	display: none;
 }

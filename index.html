@@ -1,130 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>CrossSlide</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="google-site-verification" content="51fRdx-2ED6h7sM165D6xFt80WIlp0c4vc24M8vUcQ8">
-	<script src='jquery-1.4.2.min.js'></script>
-	<script src='http://github.com/tobia/Pause/raw/master/jquery.pause.min.js'></script>
-	<script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.min.js'></script>
-	<link rel='stylesheet' href='style.css'>
-	<style>
-		div.demo {
-			width: 550px;
-		}
-		#test1 {
-			height: 367px;
-		}
-		#test2 {
-			height: 200px;
-		}
-		#test3 {
-			height: 367px;
-		}
-	</style>
-	<script>
-		$(function() {
-			var $test1 = $('#test1'),
-				$test2 = $('#test2'),
-				$test3 = $('#test3'),
-				$caption = $('div.caption'),
-				$pause = $('#pause'),
-				$resume = $('#resume'),
-				$freeze = $('#freeze'),
-				$stop = $('#stop'),
-				$restart = $('#restart');
-
-			$test1.crossSlide({
-				sleep: 2,
-				fade: 1
-			}, [
-				{ src: 'sand-castle.jpeg' },
-				{ src: 'sunflower.jpeg'   },
-				{ src: 'flip-flops.jpeg'  },
-				{ src: 'rubber-ring.jpeg' }
-			]);
-
-			$test2.crossSlide({
-				speed: 45,
-				fade: 1
-			}, [
-				{ src: 'sand-castle.jpeg', dir: 'up'   },
-				{ src: 'sunflower.jpeg',   dir: 'down' },
-				{ src: 'flip-flops.jpeg',  dir: 'up'   },
-				{ src: 'rubber-ring.jpeg', dir: 'down' }
-			]);
-
-			$test3.crossSlide({
-				fade: 1
-			}, [
-				{
-					src:  'sand-castle.jpeg',
-					from: '100% 80% 1x',
-					to:   '100% 0% 1.7x',
-					time: 3
-				}, {
-					src:  'sunflower.jpeg',
-					from: 'top left',
-					to:   'bottom right 1.5x',
-					time: 2
-				}, {
-					src:  'flip-flops.jpeg',
-					from: '100% 80% 1.5x',
-					to:   '80% 0% 1.1x',
-					time: 2
-				}, {
-					src:  'rubber-ring.jpeg',
-					from: '100% 50%',
-					to:   '30% 50% 1.5x',
-					time: 2
-				}
-			], function(idx, img, idxOut, imgOut) {
-				var captions = ['Sand Castle', 'Sunflower', 'Flip Flops', 'Rubber Ring']
-				if (idxOut == undefined) {
-					// starting single image phase, put up caption
-					$('div.caption').text(captions[idx]).fadeIn()
-				} else {
-					// starting cross-fade phase, take out caption
-					$('div.caption').fadeOut()
-				}
-			});
-
-			var STOP = 1, RUN = 2, PAUSE = 3;
-
-			function state(state) {
-				$pause.attr('disabled', state != RUN);
-				$resume.attr('disabled', state != PAUSE);
-				$freeze.attr('disabled', state == STOP);
-				$stop.attr('disabled', state == STOP);
-			}
-			state(RUN);
-
-			$pause.click(function() {
-				$test3.crossSlidePause();
-				state(PAUSE);
-			});
-
-			$resume.click(function() {
-				$test3.crossSlideResume();
-				state(RUN);
-			})
-
-			$freeze.click(function() {
-				$test3.crossSlideFreeze();
-				state(STOP);
-			});
-
-			$stop.click(function() {
-				$test3.crossSlideStop();
-				$caption.hide();
-				state(STOP);
-			});
-
-			$restart.click(function() {
-				$test3.crossSlideRestart();
-				state(RUN);
-			});
-		});
-	</script>
+  <title>CrossSlide</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="google-site-verification" content="51fRdx-2ED6h7sM165D6xFt80WIlp0c4vc24M8vUcQ8">
+  <link rel='stylesheet' href='style.css'>
 </head>
 <body>
 <div class=body>
@@ -235,11 +116,11 @@ so-called Ken Burns effect: panning, zooming and fading each image to specific
 points, to guide the eye of the viewer and convey meaning:</p>
 
 <div class=right>
-	<button id=freeze>Freeze</button><br>
-	<button id=stop>Stop</button><br>
-	<button id=restart>Restart</button><br><br>
-	<button id=pause>Pause</button><br>
-	<button id=resume>Resume</button>
+  <button id=freeze>Freeze</button><br>
+  <button id=stop>Stop</button><br>
+  <button id=restart>Restart</button><br><br>
+  <button id=pause>Pause</button><br>
+  <button id=resume>Resume</button>
 </div>
 <div class=demo id=test3>Loading...</div>
 <div class=caption></div>
@@ -272,11 +153,13 @@ number of features:</p>
     time: 2
   }
 ], function(idx, img, idxOut, imgOut) {
-  var captions = ['Sand Castle', 'Sunflower', 'Flip Flops', 'Rubber Ring']
-  if (idxOut == undefined) {
+  if (idxOut == undefined)
+  {
     // starting single image phase, put up caption
     $('div.caption').text(captions[idx]).fadeIn()
-  } else {
+  }
+  else
+  {
     // starting cross-fade phase, take out caption
     $('div.caption').fadeOut()
   }
@@ -326,13 +209,13 @@ require an extension to jQuery's animation facility, in the form of my own
 </p>
 <ul>
 <li><code>crossSlideFreeze()</code> will freeze the slideshow, using jQuery's
-	<code>stop()</code> method, leaving the images in the position they where when
-	you called it.</li>
+  <code>stop()</code> method, leaving the images in the position they where when
+  you called it.</li>
 <li><code>crossSlideStop()</code> will stop the slideshow and empty the
-	container <code>div</code>; if the container was assigned a static background
-	image or color by css, it will show through.</li>
+  container <code>div</code>; if the container was assigned a static background
+  image or color by css, it will show through.</li>
 <li><code>crossSlideRestart()</code> will stop the slideshow, if needed, and
-	restart it from the beginning.</li>
+  restart it from the beginning.</li>
 <li><code>crossSlidePause()</code> will pause the slideshow.</li>
 <li><code>crossSlideResume()</code> will resume a paused slideshow.</li>
 </ul>
@@ -376,8 +259,8 @@ section of your website:</p>
 contents, by setting its width and height in the CSS stylesheet:</p>
 
 <pre><code>#slideshow {
-	width: 600px;
-	height: 200px;
+  width: 600px;
+  height: 200px;
 }
 </code></pre></li>
 
@@ -386,17 +269,17 @@ tutorial if you wonder what it means) and activate my plugin on the
 <code>div</code> you created in step 2:</p>
 
 <pre><code>&lt;script&gt;
-	$(function() {
-		$('#slideshow').crossSlide({
-			sleep: 2,
-			fade: 1
-		}, [
-			{ src: 'picture1.jpg' },
-			{ src: 'picture2.jpg' },
-			{ src: 'picture3.jpg' },
-			{ src: 'picture4.jpg' }
-		])
-	});
+  $(function() {
+    $('#slideshow').crossSlide({
+      sleep: 2,
+      fade: 1
+    }, [
+      { src: 'picture1.jpg' },
+      { src: 'picture2.jpg' },
+      { src: 'picture3.jpg' },
+      { src: 'picture4.jpg' }
+    ])
+  });
 &lt;/script&gt;
 </code></pre></li>
 </ol>
@@ -431,15 +314,20 @@ Credits go to
 for the nice summer pictures.</p>
 
 </div>
+
+<script src='jquery-1.4.2.min.js'></script>
+<script src='http://github.com/tobia/Pause/raw/master/jquery.pause.min.js'></script>
+<script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.min.js'></script>
+<script src='script.js'></script>
 <script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-16555276-1']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16555276-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 </body>
 </html>
