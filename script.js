@@ -2,6 +2,7 @@ $(function() {
 	var $test1 = $('#test1'),
 		$test2 = $('#test2'),
 		$test3 = $('#test3'),
+		$test4 = $('#test4'),
 		$caption = $('div.caption'),
 		$pause = $('#pause'),
 		$resume = $('#resume'),
@@ -97,4 +98,32 @@ $(function() {
 		$test3.crossSlideRestart();
 		state(RUN);
 	});
+
+	$test4.crossSlide({
+		fade: 1,
+		variant: true,
+		easing: 'easeInOutQuad'
+	}, [
+		{
+			src:  'sand-castle.jpeg',
+			from: '100% 80% 1x',
+			to:   '100% 0% 1.5x',
+			time: 4
+		}, {
+			src:  'sunflower.jpeg',
+			from: 'top left',
+			to:   'bottom right 1.5x',
+			time: 4
+		}, {
+			src:  'flip-flops.jpeg',
+			from: '100% 80% 1.5x',
+			to:   '80% 0%',
+			time: 4
+		}, {
+			src:  'rubber-ring.jpeg',
+			from: '100% 50%',
+			to:   '30% 50% 1.5x',
+			time: 4
+		}
+	]);
 });

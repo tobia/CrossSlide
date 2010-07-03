@@ -50,7 +50,7 @@ div.demo {
 #test2 {
 	height: 200px;
 }
-#test3 {
+#test3, #test4 {
 	height: 367px;
 }
 hr {
