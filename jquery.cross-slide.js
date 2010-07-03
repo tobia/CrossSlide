@@ -1,5 +1,5 @@
 /*!
- * CrossSlide jQuery plugin v0.5
+ * CrossSlide jQuery plugin v0.6
  *
  * Copyright 2007-2010 by Tobia Conforto <tobia.conforto@gmail.com>
  *
@@ -19,6 +19,7 @@
  */
 /* Changelog:
  *
+ * 0.6    2010-07-03  Variant Ken Burns effect
  * 0.5    2010-06-13  Support for animation control and event callbacks
  * 0.4.2  2010-06-07  Bugfix
  * 0.4.1  2010-06-04  Added target option
@@ -108,7 +109,9 @@
 			return $.extend({}, p);
 		});
 
-		// dummy callback if undefined
+		// options with default values
+		if (! opts.easing)
+			opts.easing = opts.variant ? 'swing' : 'linear';
 		if (! callback)
 			callback = function() {};
 
@@ -227,11 +230,11 @@
 
 				// precalculate left/top/width/height bounding values
 				if (p.from)
-					$.each([ p.from, p.to ], function(i, step) {
-						step.width = Math.round(p.width * step.zoom);
-						step.height = Math.round(p.height * step.zoom);
-						step.left = Math.round((self_width - step.width) * step.xrel);
-						step.top = Math.round((self_height - step.height) * step.yrel);
+					$.each([ p.from, p.to ], function(i, each) {
+						each.width = Math.round(p.width * each.zoom);
+						each.height = Math.round(p.height * each.zoom);
+						each.left = Math.round((self_width - each.width) * each.xrel);
+						each.top = Math.round((self_height - each.height) * each.yrel);
 					});
 
 				// append the image (or anchor) element to the container
@@ -275,7 +278,7 @@
 			// show first image
 			imgs.eq(0).css({ visibility: 'visible' });
 			if (! sleep)
-				imgs.eq(0).css(position_to_css(plan[0], 1));
+				imgs.eq(0).css(position_to_css(plan[0], opts.variant ? 0 : 1));
 
 			// create animation chain
 			var countdown = opts.loop;
@@ -301,11 +304,12 @@
 								img_slide = imgs.eq(i_slide),
 								img_hide = imgs.eq(i_hide),
 								time = plan[i_slide].time_ms,
-								slide_anim = position_to_css(plan[i_slide], 2);
+								slide_anim = position_to_css(plan[i_slide],
+									opts.variant ? 3 : 2);
 						var newf = function() {
 							callback(i_slide, img_slide);
 							img_hide.css('visibility', 'hidden');
-							img_slide[animate](slide_anim, time, 'linear', chainf);
+							img_slide[animate](slide_anim, time, opts.easing, chainf);
 						};
 					}
 				} else {
@@ -331,9 +335,11 @@
 					}
 					if (! sleep) {
 						// moving images
-						$.extend(from_anim, position_to_css(plan[i_from], 3));
 						$.extend(to_init, position_to_css(plan[i_to], 0));
-						$.extend(to_anim, position_to_css(plan[i_to], 1));
+						if (! opts.variant) {
+							$.extend(from_anim, position_to_css(plan[i_from], 3));
+							$.extend(to_anim, position_to_css(plan[i_to], 1));
+						}
 					}
 					if ($.isEmptyObject(to_anim)) {
 						var newf = function() {
