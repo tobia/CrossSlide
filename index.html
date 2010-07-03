@@ -221,6 +221,31 @@ require an extension to jQuery's animation facility, in the form of my own
 <li><code>crossSlideResume()</code> will resume a paused slideshow.</li>
 </ul>
 
+<h2>Ken Burns variant</h2>
+
+<p><b>NEW</b> – At the request of some users, here is a variant of the Ken Burns effect that
+does away with the cross-fade between moving images:</p>
+
+<div class=demo id=test4>Loading...</div>
+
+<p>This effect is turned on with the <code>variant</code> option. To get a
+pleasing effect in this variant, a linear animation is not appropriate for the
+single-image phase, so CrossSlide defaults to jQuery's built-in
+<code>swing</code> mode. You can choose a different easing effect with the
+<code>easing</code> option, which will be applied to single-image phases only:
+cross-fade phases are still rendered with a linear animation. In this example
+I'm using <code>easeInOutQuad</code> from George McGinley Smith's
+<a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Easing Plugin</a>.</p>
+
+<pre><code>$('#placeholder').crossSlide({
+  fade: 1,
+  variant: true,
+  easing: 'easeInOutQuad'
+}, [
+  // as above
+]);
+</code></pre>
+
 <h2>Performance</h2>
 
 <p>jQuery animation effects rely on the browser for positioning, scaling and
@@ -234,17 +259,19 @@ tested shows decent performance: Firefox on Windows; Internet Explorer, Safari,
 Opera and Chrome.</p>
 
 <p>Some browsers on some platforms apply a nice anti-alias filter to the images
-when you use a zoom factor in the Ken Burns mode, but others don't. Therefore I
+when you use a zoom factor in the Ken Burns mode, but most don't. Therefore I
 recommend keeping your zoom factors below 1x, in order to avoid ugly 'pixel
-mosaic' effects.</p>
+mosaic' effects. Advice which I didn't follow in this very site, as you can
+tell by the ugly pixel noise in the Ken Burns examples above.</p>
 
 <h2>How to use it</h2>
 
 <p>Here is how to put CrossSlide on your website in four simple steps!</p>
 
 <ol>
-<li><p>Include the jQuery library and my plugin in the <code>head</code>
-section of your website:</p>
+<li><p>Download the <a href="http://www.jquery.com/">jQuery</a> library and
+include it along with my plugin in the <code>head</code> section of your
+website:</p>
 
 <pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="jquery.cross-slide.min.js"&gt;&lt;/script&gt;
@@ -288,9 +315,10 @@ tutorial if you wonder what it means) and activate my plugin on the
 <p>Things to keep in mind:</p>
 
 <ul>
-<li><p>Keep an eye on the Error console (in Firefox it's under Tools menu)
-because that's where my script will post any error messages you are supposed to
-read, for example when the options you use don't make sense together.</p></li>
+<li><p>Keep an eye on the <b>Error console</b> (no, I'm not talking about the
+status bar; in Firefox it's under the Tools menu) because that's where my
+script will post any error messages you are supposed to read, for example when
+the options you use don't make sense together.</p></li>
 <li><p>Make sure the browser can find the images you reference in the
 <code>src</code> attributes, relative to the path of the current page, because
 if the browser cannot load them, my plugin has no way to know and will just
@@ -317,9 +345,11 @@ for the nice summer pictures.</p>
 </div>
 
 <script src='jquery-1.4.2.min.js'></script>
+<script src='jquery.easing.min.js'></script>
 <script src='http://github.com/tobia/Pause/raw/master/jquery.pause.min.js'></script>
 <script src='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.min.js'></script>
 <script src='script.js'></script>
+
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-16555276-1']);
@@ -330,5 +360,6 @@ for the nice summer pictures.</p>
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
 </body>
 </html>
