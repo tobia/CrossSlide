@@ -19,6 +19,7 @@
  */
 /* Changelog:
  *
+ * 0.6.1  2010-08-02  Bugfixes
  * 0.6    2010-07-03  Variant Ken Burns effect
  * 0.5    2010-06-13  Support for animation control and event callbacks
  * 0.4.2  2010-06-07  Bugfix
@@ -100,6 +101,10 @@
 		var self = this,
 				self_width = this.width(),
 				self_height = this.height();
+
+		// must be called on exactly 1 element
+		if (self.length != 1)
+			abort('crossSlide() must be called on exactly 1 element')
 
 		// saving params for crossSlide.restart
 		self.get(0).crossSlideArgs = [ opts, plan, callback ];
@@ -238,15 +243,14 @@
 					});
 
 				// append the image (or anchor) element to the container
-				var elm;
+				var img, elm;
+				elm = img = $(format('<img src="{0}"/>', p.src));
 				if (p.href)
-					elm = $(format('<a href="{0}"><img src="{1}"/></a>',p.href,p.src));
-				else
-					elm = $(format('<img src="{0}"/>', p.src));
+					elm = $(format('<a href="{0}"></a>', p.href)).append(img);
 				if (p.onclick)
 					elm.click(p.onclick);
 				if (p.alt)
-					elm.find('img').attr('alt', p.alt);
+					img.attr('alt', p.alt);
 				if (p.href && p.target)
 					elm.attr('target', p.target);
 				elm.appendTo(self);
@@ -293,7 +297,7 @@
 								img_sleep = imgs.eq(i_sleep),
 								img_hide = imgs.eq(i_hide);
 						var newf = function() {
-							callback(i_sleep, img_sleep);
+							callback(i_sleep, img_sleep.get(0));
 							img_hide.css('visibility', 'hidden');
 							setTimeout(chainf, sleep);
 						};
@@ -307,7 +311,7 @@
 								slide_anim = position_to_css(plan[i_slide],
 									opts.variant ? 3 : 2);
 						var newf = function() {
-							callback(i_slide, img_slide);
+							callback(i_slide, img_slide.get(0));
 							img_hide.css('visibility', 'hidden');
 							img_slide[animate](slide_anim, time, opts.easing, chainf);
 						};
@@ -343,19 +347,19 @@
 					}
 					if ($.isEmptyObject(to_anim)) {
 						var newf = function() {
-							callback(i_to, img_to, i_from, img_from);
+							callback(i_to, img_to.get(0), i_from, img_from.get(0));
 							img_to.css(to_init);
 							img_from[animate](from_anim, fade_ms, 'linear', chainf);
 						};
 					} else if ($.isEmptyObject(from_anim)) {
 						var newf = function() {
-							callback(i_to, img_to, i_from, img_from);
+							callback(i_to, img_to.get(0), i_from, img_from.get(0));
 							img_to.css(to_init);
 							img_to[animate](to_anim, fade_ms, 'linear', chainf);
 						};
 					} else {
 						var newf = function() {
-							callback(i_to, img_to, i_from, img_from);
+							callback(i_to, img_to.get(0), i_from, img_from.get(0));
 							img_to.css(to_init);
 							img_to[animate](to_anim, fade_ms, 'linear');
 							img_from[animate](from_anim, fade_ms, 'linear', chainf);
