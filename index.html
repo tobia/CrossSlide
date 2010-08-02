@@ -134,21 +134,25 @@ number of features:</p>
 }, [
   {
     src:  'sand-castle.jpeg',
+    alt:  'Sand Castle',
     from: '100% 80% 1x',
     to:   '100% 0% 1.7x',
     time: 3
   }, {
     src:  'sunflower.jpeg',
+    alt:  'Sunflower',
     from: 'top left',
     to:   'bottom right 1.5x',
     time: 2
   }, {
     src:  'flip-flops.jpeg',
+    alt:  'Flip Flops',
     from: '100% 80% 1.5x',
     to:   '80% 0% 1.1x',
     time: 2
   }, {
     src:  'rubber-ring.jpeg',
+    alt:  'Rubber Ring',
     from: '100% 50%',
     to:   '30% 50% 1.5x',
     time: 2
@@ -157,7 +161,7 @@ number of features:</p>
   if (idxOut == undefined)
   {
     // starting single image phase, put up caption
-    $('div.caption').text(captions[idx]).fadeIn()
+    $('div.caption').text(img.alt).animate({ opacity: .7 })
   }
   else
   {

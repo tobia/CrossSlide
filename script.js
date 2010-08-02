@@ -9,7 +9,6 @@ $(function() {
 		$freeze = $('#freeze'),
 		$stop = $('#stop'),
 		$restart = $('#restart'),
-		captions = ['Sand Castle', 'Sunflower', 'Flip Flops', 'Rubber Ring'],
 		STOP = 1, RUN = 2, PAUSE = 3;
 
 	$test1.crossSlide({
@@ -37,28 +36,32 @@ $(function() {
 	}, [
 		{
 			src:  'sand-castle.jpeg',
+			alt:  'Sand Castle',
 			from: '100% 80% 1x',
 			to:   '100% 0% 1.7x',
 			time: 3
 		}, {
 			src:  'sunflower.jpeg',
+			alt:  'Sunflower',
 			from: 'top left',
 			to:   'bottom right 1.5x',
 			time: 2
 		}, {
 			src:  'flip-flops.jpeg',
+			alt:  'Flip Flops',
 			from: '100% 80% 1.5x',
 			to:   '80% 0% 1.1x',
 			time: 2
 		}, {
 			src:  'rubber-ring.jpeg',
+			alt:  'Rubber Ring',
 			from: '100% 50%',
 			to:   '30% 50% 1.5x',
 			time: 2
 		}
 	], function(idx, img, idxOut, imgOut) {
 		if (idxOut == undefined) {
-			$caption.text(captions[idx]).animate({ opacity: .7 })
+			$caption.text(img.alt).animate({ opacity: .7 })
 		} else {
 			$caption.animate({ opacity: 0 })
 		}
