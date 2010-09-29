@@ -1,5 +1,5 @@
 /*!
- * CrossSlide jQuery plugin v0.6
+ * CrossSlide jQuery plugin v0.6.2
  *
  * Copyright 2007-2010 by Tobia Conforto <tobia.conforto@gmail.com>
  *
@@ -19,6 +19,7 @@
  */
 /* Changelog:
  *
+ * 0.6.2  2010-09-29  Added support for rel attribute
  * 0.6.1  2010-08-02  Bugfixes
  * 0.6    2010-07-03  Variant Ken Burns effect
  * 0.5    2010-06-13  Support for animation control and event callbacks
@@ -251,6 +252,8 @@
 					elm.click(p.onclick);
 				if (p.alt)
 					img.attr('alt', p.alt);
+				if (p.rel)
+					elm.attr('rel', p.rel);
 				if (p.href && p.target)
 					elm.attr('target', p.target);
 				elm.appendTo(self);
