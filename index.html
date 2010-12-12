@@ -17,8 +17,7 @@
 <a href='http://github.com/tobia/CrossSlide'>Project page</a> –
 <a href='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.min.js'><b>Download minified</b></a> –
 <a href='http://github.com/tobia/CrossSlide/raw/master/jquery.cross-slide.js'>Download source</a> –
-<a href='http://github.com/tobia/CrossSlide/issues'>Report issues</a> –
-<a href='email.html'>Email me</a>
+<a href='email.html'>Bugs, feature requests and support</a>
 </p>
 <hr>
 
@@ -194,23 +193,28 @@ shuffle the images before starting the slideshow; and <code>doubleFade</code>
 (boolean) to have both a fade-out and a fade-in effect when switching images
 (this is useful with transparent images.)</p>
 
-<p><b>NEW</b> – As shown in this example, CrossSlide now accepts a callback
-function as a third argument. This callback will be invoked at every keyframe,
-meaning when an image starts to be cross-faded with another, and when the
-cross-fade ends and a single image remains on screen. The callback will be
-passed either 2 or 4 arguments, depending on the phase of the animation. If we
-are at the beginning of a single image-phase, the callback will be passed 2
-arguments: the index of the image in the array and the <code>&lt;img&gt;</code>
-object currently being animated. If we are at the beginning of a cross-fade, the
-callback will be passed 4 arguments: index and img element of the incoming
-image, plus index and img element of the outgoing image. You can see how the
-example exploits this fact to show a nice textual caption.</p>
+<p>As shown in this example, CrossSlide accepts a callback function as a third
+argument. This callback will be invoked at every keyframe, meaning when an image
+starts to be cross-faded with another, and when the cross-fade ends and a single
+image remains on screen. The callback will be passed either 2 or 4 arguments,
+depending on the phase of the animation. If we are at the beginning of a single
+image-phase, the callback will be passed 2 arguments: the index of the image in
+the array and the <code>&lt;img&gt;</code> object currently being animated. If
+we are at the beginning of a cross-fade, the callback will be passed 4
+arguments: index and img element of the incoming image, plus index and img
+element of the outgoing image. You can see how the example exploits this fact to
+show a nice textual caption.</p>
 
-<p><b>NEW</b> – There are 5 methods you can invoke at runtime on the same object
-you invoked <code>crossSlide()</code> on, to control the animation. The first 3
-use jQuery standard functions. The pause and resume methods, on the other hand,
-require an extension to jQuery's animation facility, in the form of my own
-<a href="/Pause/">jQuery Pause plugin</a>.
+<p>In case you're misunderstanding the above, I need to make clear that the
+callback system is a programmer's tool and it can be used for much more than
+captions. Still, if you can't write Javascript code, don't expect to be able to
+make it work!</p>
+
+<p>Finally, there are 5 methods you can invoke at runtime on the same object you
+invoked <code>crossSlide()</code> on, to control the animation. The first 3 use
+jQuery standard functions. The pause and resume methods, on the other hand,
+require an extension to jQuery's animation facility, in the form of my own <a
+href="/Pause/">jQuery Pause plugin</a>.
 </p>
 <ul>
 <li><code>crossSlideFreeze()</code> will freeze the slideshow, using jQuery's
@@ -227,8 +231,9 @@ require an extension to jQuery's animation facility, in the form of my own
 
 <h2>Ken Burns variant</h2>
 
-<p><b>NEW</b> – At the request of some users, here is a variant of the Ken Burns effect that
-does away with the cross-fade between moving images:</p>
+<p>At the request of some users, here is a variant of the Ken Burns effect that
+does away with the cross-fade between moving images, which is the phase most
+demanding on the browser's rendering engine:</p>
 
 <div class=demo id=test4>Loading...</div>
 
@@ -256,21 +261,25 @@ I'm using <code>easeInOutQuad</code> from George McGinley Smith's
 cropping images, through CSS and the DOM. Thus it depends heavily on how the
 browser and the underlying graphics platform optimize these operations.
 Compared to native implementations of the same effects, CrossSlide is quite
-CPU-intensive, but recent hardware handles a moderate usage without problems. A
-few combinations of browsers and platforms seem to be less optimized than
-others, namely Firefox on Mac OS X and Linux. Every other combination I've
-tested shows decent performance: Firefox on Windows; Internet Explorer, Safari,
-Opera and Chrome.</p>
+CPU-intensive, but recent hardware handles a moderate usage without
+problems.</p>
 
-<p>Some browsers on some platforms apply a nice anti-alias filter to the images
-when you use a zoom factor in the Ken Burns mode, but most don't. Therefore I
+<p>Some browsers on some platforms apply a nice anti-alias filter to images when
+you use a zoom factor in the Ken Burns mode, but most don't. Therefore I
 recommend keeping your zoom factors below 1x, in order to avoid ugly 'pixel
-mosaic' effects. Advice which I didn't follow in this very site, as you can
-tell by the ugly pixel noise in the Ken Burns examples above.</p>
+mosaic' effects. You can tell that I didn't follow my own advice in this very
+site by the ugly pixel noise in the Ken Burns examples above.</p>
+
+<p>It also bears to mention that CSS and DOM force a script to round position
+and size of images to integer pixel values, for every frame of an animation, not
+just keyframes. This effectively makes it impossible to achieve slow, smooth
+animations. If you are experiencing this issue, my only advice is to either make
+the animation faster, do away with diagonal panning and/or image zooming, or
+switch to a different animation technology.
 
 <h2>How to use it</h2>
 
-<p>Here is how to put CrossSlide on your website in four simple steps!</p>
+<p>Here is a simple guide on how to put CrossSlide on a website:</p>
 
 <ol>
 <li><p>Download the <a href="http://www.jquery.com/">jQuery</a> library and
@@ -296,9 +305,8 @@ contents, by setting its width and height in the CSS stylesheet:</p>
 }
 </code></pre></li>
 
-<li><p>Open a script tag, define a "document ready handler" (see the jQuery
-tutorial if you wonder what it means) and activate my plugin on the
-<code>div</code> you created in step 2:</p>
+<li><p>Open a script tag, define a "document ready handler" and activate my
+plugin on the <code>div</code> you created in step 2:</p>
 
 <pre><code>&lt;script&gt;
   $(function() {
@@ -316,13 +324,13 @@ tutorial if you wonder what it means) and activate my plugin on the
 </code></pre></li>
 </ol>
 
+<img src='error-console.png' align='right'>
 <p>Things to keep in mind:</p>
 
 <ul>
-<li><p>Keep an eye on the <b>Error console</b> (no, I'm not talking about the
-status bar; in Firefox it's under the Tools menu) because that's where my
-script will post any error messages you are supposed to read, for example when
-the options you use don't make sense together.</p></li>
+<li><p>Keep an eye on the Error console (in Firefox it's under the Tools menu)
+as that's where my script will post any error messages you are supposed to
+read, for example when the options you use don't make sense together.</p></li>
 <li><p>Make sure the browser can find the images you reference in the
 <code>src</code> attributes, relative to the path of the current page, because
 if the browser cannot load them, my plugin has no way to know and will just
@@ -331,9 +339,12 @@ hangs there, without any error messages.</p></li>
 means don't put a comma just before a closing brace or bracket, even if it's on
 the previous line) because Internet Explorer won't like it and will refuse to
 run the script, again without any error message.</p></li>
+<li><p>Don't call <code>crossSlide()</code> on an empty set or on a set of more
+than one element. This is not supported and will raise an exception—as you can
+see clearly if you are keeping an eye on the Error Console.</p></li>
 </ul>
 
-<hr>
+<hr style="clear:both">
 
 <p class=footer>
 <a name=note1 href=#use1>1</a>: minified and gzipped, code only.<br></p>
