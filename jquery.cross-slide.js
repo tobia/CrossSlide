@@ -58,6 +58,15 @@
 		arguments[0] = 'CrossSlide: ' + arguments[0];
 		throw new Error(format.apply(null, arguments));
 	}
+	
+	function isEmpty(map) {
+		var empty = true;
+		for(var key in map) {
+			empty = false;
+			break;
+		}
+		return empty;
+	}
 
 	// utility to parse "from" and "to" parameters
 	function parse_position_param(param) {
@@ -348,13 +357,13 @@
 							$.extend(to_anim, position_to_css(plan[i_to], 1));
 						}
 					}
-					if ($.isEmptyObject(to_anim)) {
+					if (isEmpty(to_anim)) {
 						var newf = function() {
 							callback(i_to, img_to.get(0), i_from, img_from.get(0));
 							img_to.css(to_init);
 							img_from[animate](from_anim, fade_ms, 'linear', chainf);
 						};
-					} else if ($.isEmptyObject(from_anim)) {
+					} else if (isEmpty(from_anim)) {
 						var newf = function() {
 							callback(i_to, img_to.get(0), i_from, img_from.get(0));
 							img_to.css(to_init);
